@@ -24,11 +24,7 @@ public class UserOrderController {
         if (StringUtils.isBlank(userId)) {
             return Mono.error(new IllegalArgumentException("userId cannot be empty"));
         }
-<<<<<<< HEAD
         return userService.getProductWithHighestScoreByUserId(userId)
                 .switchIfEmpty(Mono.error(new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND)));
-=======
-        return userService.getProductWithHighestScoreByUserId(userId);
->>>>>>> main
     }
 }
