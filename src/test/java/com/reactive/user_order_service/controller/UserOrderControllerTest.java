@@ -34,7 +34,11 @@ class UserOrderControllerTest {
                 .thenReturn(Mono.just(mockProduct));
 
         webTestClient.get()
+<<<<<<< HEAD
                 .uri("/user-order-service/orders/user/user1")
+=======
+                .uri("/userOrderService/orders/user/user1")
+>>>>>>> main
                 .header("X-Request-Id", "test-request-id")
                 .accept(MediaType.APPLICATION_NDJSON)
                 .exchange()
@@ -52,6 +56,7 @@ class UserOrderControllerTest {
     @Test
     void getOrdersByUserId_userNotFound_returnsNotFound() {
         when(userService.getProductWithHighestScoreByUserId(anyString()))
+<<<<<<< HEAD
                 .thenReturn(Mono.empty());
 
         webTestClient.get()
@@ -60,5 +65,15 @@ class UserOrderControllerTest {
                 .accept(MediaType.APPLICATION_NDJSON)
                 .exchange()
                 .expectStatus().isNotFound();
+=======
+                .thenReturn(Mono.error(new RuntimeException("User not found")));
+
+        webTestClient.get()
+                .uri("/userOrderService/orders/user/nonexistent")
+                .header("X-Request-Id", "test-request-id")
+                .accept(MediaType.APPLICATION_NDJSON)
+                .exchange()
+                .expectStatus().is5xxServerError();
+>>>>>>> main
     }
 }
